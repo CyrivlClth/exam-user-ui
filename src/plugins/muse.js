@@ -7,7 +7,13 @@ import {
     Helpers,
     Snackbar,
     Icon,
-    Dialog
+    Dialog,
+    Card,
+    List,
+    Divider,
+    Paper,
+    Checkbox,
+    Radio
 } from 'muse-ui';
 import 'muse-ui/lib/styles/theme.less';
 import 'muse-ui-message/dist/muse-ui-message.css';
@@ -21,3 +27,9 @@ Vue.use(Helpers);
 Vue.use(Snackbar);
 Vue.use(Icon);
 Vue.use(Dialog);
+Vue.use(Card);
+Vue.use(List);
+Vue.use(Divider);
+Vue.use(Paper);
+Vue.use(Checkbox);
+Vue.use(Radio);

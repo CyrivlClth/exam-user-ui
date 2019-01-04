@@ -33,7 +33,10 @@ export default {
         });
     },
     next() {
-      this.$router.push("/tasks/" + this.value);
+      this.$router.push({
+        name: "tasks",
+        params: { taskId: parseInt(this.value) }
+      });
     }
   }
 };

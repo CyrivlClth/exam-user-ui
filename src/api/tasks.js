@@ -1,10 +1,8 @@
 import request from '@/utils/request'
 
-
-export function GetTest() {
+export function GetTask(id) {
     return request({
-        url: '/tasks',
+        url: '/tasks/' + id,
         method: 'get',
     })
 }
-
