@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
-
+import Message from 'muse-ui-message';
 
 // 创建axios实例
 const service = axios.create({
@@ -46,7 +46,7 @@ service.interceptors.response.use(
         //   })
         // }
 
-        // toast.error(error.response.data.message)
+        Message.alert("error.response.data.message", "alert")
         // })
         return Promise.reject(error)
     }
