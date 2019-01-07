@@ -1,9 +1,9 @@
 <template>
   <mu-row gutter justify-content="center">
-    <mu-select label="Filerable Select" filterable v-model="value" full-width>
+    <mu-select label="选择任务" filterable v-model="value" full-width>
       <mu-option v-for="k in options" :key="k.id" :label="k.name" :value="k.id"></mu-option>
     </mu-select>
-    <mu-button @click="next()" full-width round large color="indigo400">full width button</mu-button>
+    <mu-button @click="next()" full-width round large color="primary">开始考试</mu-button>
   </mu-row>
 </template>
 

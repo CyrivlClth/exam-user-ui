@@ -13,7 +13,12 @@ import {
     Divider,
     Paper,
     Checkbox,
-    Radio
+    Radio,
+    AppBar,
+    Form,
+    TextField,
+    Avatar,
+    BottomNav
 } from 'muse-ui';
 import 'muse-ui/lib/styles/theme.less';
 import 'muse-ui-message/dist/muse-ui-message.css';
@@ -33,3 +38,8 @@ Vue.use(Divider);
 Vue.use(Paper);
 Vue.use(Checkbox);
 Vue.use(Radio);
+Vue.use(AppBar);
+Vue.use(Form);
+Vue.use(TextField);
+Vue.use(Avatar);
+Vue.use(BottomNav);

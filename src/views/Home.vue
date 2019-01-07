@@ -1,8 +1,12 @@
 <template>
-  <mu-row gutter justify-content="center" class="button-wrapper">
-    <mu-button to="/select" round large color="indigo400">full width button</mu-button>
-    <mu-button flat round large color="indigo400">full width button</mu-button>
-  </mu-row>
+  <div>
+    <mu-row>
+      <mu-button to="/select" full-width round large color="primary">开始</mu-button>
+    </mu-row>
+    <mu-row>
+      <mu-button full-width round large>full width button</mu-button>
+    </mu-row>
+  </div>
 </template>
 
 <script>
