@@ -22,16 +22,24 @@ export default new Router({
           component: () => import('./views/Select.vue')
         },
         {
-          path: 'tasks/:taskId',
-          name: 'tasks',
-          props: (route) => {
-            {
-              route.params.taskId
-            }
-          },
-          component: () => import('./views/Exam.vue')
+          path: "history",
+          component: () => import('./views/Grade.vue')
         },
+        {
+          path: "account",
+          component: () => import('./views/Account.vue')
+        }
       ]
+    },
+    {
+      path: '/start/:taskId',
+      name: 'start',
+      props: (route) => {
+        {
+          route.params.taskId
+        }
+      },
+      component: () => import('./views/Exam.vue')
     },
     {
       path: '/login',

@@ -1,28 +1,48 @@
 <template>
-  <div>
-    <mu-row>
-      <mu-button to="/select" full-width round large color="primary">开始</mu-button>
-    </mu-row>
-    <mu-row>
-      <mu-button full-width round large>full width button</mu-button>
-    </mu-row>
-  </div>
+  <v-layout row justify-center>
+    <v-btn @click="next()" color="primary" block round large>{{btnText}}</v-btn>
+  </v-layout>
 </template>
 
 <script>
-import { GetTest } from "@/api/test";
+import { GetStart } from "@/api/start";
 
 export default {
   name: "home",
+  data() {
+    return {
+      dialog: false,
+      item: {
+        has_exam: false
+      },
+      notifications: false,
+      sound: true,
+      widgets: false
+    };
+  },
+  computed: {
+    btnText() {
+      return this.item.has_exam ? "继续" : "开始";
+    }
+  },
+  mounted() {
+    this.getData();
+  },
   methods: {
     getData() {
-      GetTest()
+      GetStart()
         .then(res => {
           console.log(res.data);
+          this.item = res.data;
         })
         .catch(() => {
           console.log(111111);
         });
+    },
+    next() {
+      if (this.item.has_exam) {
+        this.$router.push("/start/1");
+      }
     }
   }
 };

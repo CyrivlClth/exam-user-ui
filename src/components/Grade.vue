@@ -1,36 +1,7 @@
 <template>
   <div>
-    {{item}}
-    <mu-card>
-      <mu-card-header :title="item.question.chapter" :sub-title="'第'+item.question.no+'题'"></mu-card-header>
-      <mu-card-text>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{item.question.text}}</mu-card-text>
-      <mu-paper :z-depth="1">
-        <mu-list v-model="value">
-          <mu-list-item button :ripple="false">
-            <mu-list-item-title>Follow up</mu-list-item-title>
-            <mu-list-item-action>
-              <mu-icon value="info"></mu-icon>
-            </mu-list-item-action>
-          </mu-list-item>
-          <mu-divider></mu-divider>
-          <mu-list-item
-            button
-            :key="'listItem'+i"
-            v-for="(v,i) in item.question.choices"
-            @click="updateAnswer(i)"
-          >
-            <mu-list-item-action>
-              <mu-checkbox v-if="v.type===1" :ref="'child'+i" :label="v" v-model="value" :value="i"></mu-checkbox>
-              <mu-radio v-else :ref="'child'+i" :label="v" v-model="value" :value="i"></mu-radio>
-            </mu-list-item-action>
-          </mu-list-item>
-        </mu-list>
-
-        <Single :answer="value" :choices="item.question.choices" @change="handleChange"/>
-        <Multiple :answer="item.answer" :choices="item.question.choices" @change="handleChange"/>
-        <Judge :answer="item.answer" :choices="item.question.choices" @change="handleChange"/>
-      </mu-paper>
-    </mu-card>
+    <p :key="i" v-for="i in 300">{{i}}</p>
+    <p :key="'i'+i" v-for="(v,i) in item">{{v}}</p>
   </div>
 </template>
 
@@ -49,10 +20,11 @@ export default {
   },
   data() {
     return {
-      item: null,
+      item: [],
       notifications: false,
       value: [1],
-      t: null
+      t: null,
+      t: 0
     };
   },
   watch: {
@@ -60,10 +32,26 @@ export default {
       console.log(n);
     }
   },
-  created() {
-    this.getTask(this.taskId);
+  // created() {
+  //   this.getTask(this.taskId);
+  // },
+  mounted() {
+    this.scroll(this.item);
   },
   methods: {
+    scroll(person) {
+      window.onscroll = () => {
+        let bottomOfWindow =
+          document.documentElement.scrollTop + window.innerHeight ===
+          document.documentElement.offsetHeight;
+
+        if (bottomOfWindow && this.t < 10) {
+          // person.push("123123");
+          person.push(["!23", "1235"]);
+          this.t++;
+        }
+      };
+    },
     handleChange(o) {
       console.log(o);
       this.value = o;

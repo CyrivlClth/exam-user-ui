@@ -1,46 +1,85 @@
 <template>
-  <div>
-    <mu-appbar
-      :z-depth="1"
-      style="width:100%;position:fixed;top:0;max-width:800px;"
-      title="用户登录"
-      color="primary"
-    >
-      <mu-button icon slot="left" @click="$router.go(-1)">
-        <mu-icon value="arrow_back"></mu-icon>
-      </mu-button>
-      {{examname}},你好!接下来...
-    </mu-appbar>
-    <mu-paper :z-depth="0" style="padding:16px;margin-left:auto;margin-right:auto;margin-top:64px;">
-      <mu-flex justify-content="around">
-        <img src="../assets/logo.png">
-      </mu-flex>
-      <transition name="slide-right">
-        <router-view></router-view>
-      </transition>
-    </mu-paper>
-    <mu-bottom-nav
-      :value.sync="shift"
-      shift
-      style="position:fixed;bottom:0;width:100%;max-width:800px;"
-    >
-      <mu-bottom-nav-item value="movies" title="Movies" icon="ondemand_video"></mu-bottom-nav-item>
-      <mu-bottom-nav-item value="music" title="Music" icon="music_note"></mu-bottom-nav-item>
-      <mu-bottom-nav-item value="books" title="Books" icon="books"></mu-bottom-nav-item>
-      <mu-bottom-nav-item value="pictures" title="Pictures" icon="photo"></mu-bottom-nav-item>
-    </mu-bottom-nav>
-  </div>
+  <v-app id="inspire" :dark="dark">
+    <v-navigation-drawer app v-model="drawer" color="
+    cyan">
+      <v-btn @click="dark=!dark">aaa</v-btn>
+    </v-navigation-drawer>
+    <v-toolbar app absolute color="primary" dark>
+      <v-toolbar-title>{{titleText}}</v-toolbar-title>
+    </v-toolbar>
+    <v-content>
+      <v-container app>
+        <v-scale-transition hide-on-leave>
+          <router-view></router-view>
+        </v-scale-transition>
+      </v-container>
+    </v-content>
+    <v-footer>
+      <v-bottom-nav fixed :value="true" :active.sync="bottomNav">
+        <v-btn flat value="start" to="/" color="primary">
+          <span>开始</span>
+          <v-icon>beenhere</v-icon>
+        </v-btn>
+        <v-btn flat value="histroy" to="/history" color="primary">
+          <span>历史</span>
+          <v-icon>history</v-icon>
+        </v-btn>
+        <v-btn flat value="account" to="/account" color="primary">
+          <span>用户</span>
+          <v-icon>account_circle</v-icon>
+        </v-btn>
+      </v-bottom-nav>
+    </v-footer>
+  </v-app>
 </template>
 
 
 <script>
+const titleMap = { start: "开始", histroy: "历史", account: "用户" };
+
 export default {
   name: "home",
+  computed: {
+    titleText() {
+      return titleMap[this.bottomNav];
+    }
+  },
   data() {
     return {
       examname: "AAA",
-      shift: "movies"
+      shift: "movies",
+      drawer: false,
+      dark: false,
+      bottomNav: ""
     };
   }
 };
 </script>
+
+<style lang="less">
+#inspire {
+  margin: auto;
+  max-width: 600px;
+  // .v-toolbar {
+  //   position: fixed;
+  //   margin-bottom: 64px;
+  //   left: auto;
+  //   max-width: 600px;
+  // }
+  // .v-bottom-nav {
+  // position: fixed;
+  //   margin-top: 64px;
+  //   margin: auto;
+  // bottom: 0;
+  //   left: auto;
+  //   max-width: 600px;
+  // }
+}
+// .v-toolbar {
+//   margin: auto;
+//   top: 0;
+//   position: absolute;
+//   max-width: 400px;
+// }
+</style>
+
