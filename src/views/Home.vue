@@ -12,9 +12,7 @@ export default {
   data() {
     return {
       dialog: false,
-      item: {
-        has_exam: false
-      },
+      item: null,
       notifications: false,
       sound: true,
       widgets: false
@@ -22,7 +20,7 @@ export default {
   },
   computed: {
     btnText() {
-      return this.item.has_exam ? "继续" : "开始";
+      return this.item ? "继续" : "开始";
     }
   },
   mounted() {
@@ -33,14 +31,15 @@ export default {
       GetStart()
         .then(res => {
           console.log(res.data);
-          this.item = res.data;
+          this.item = res.data.data;
         })
         .catch(() => {
           console.log(111111);
         });
     },
     next() {
-      if (this.item.has_exam) {
+      if (this.item) {
+        this.$store.commit("updateSheet", this.item);
         this.$router.push("/start/1");
       }
     }

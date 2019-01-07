@@ -1,31 +1,68 @@
 const startList = {
     code: 200,
-    has_exam: true,
-    data: [{
+    data: {
+        id: 1,
+        task_name: "one",
+        task_id: 1,
+        grade: "92.1",
+        answer: [0, 0, 0],
+        questions: [{
             id: 1,
-            name: "one"
+            no: "1",
+            team_id: 1,
+            type: 0,
+            chapter: "测试习题",
+            text: "1+1=?",
+            choices: [
+                "2",
+                "3",
+                "4",
+                "5"
+            ]
         },
         {
-            id: 2,
-            name: "two"
+            id: 1,
+            no: "2",
+            team_id: 1,
+            type: 1,
+            chapter: "测试习题",
+            text: "多选AC",
+            choices: [
+                "2",
+                "3",
+                "4",
+                "5"
+            ]
         },
         {
-            id: 3,
-            name: "three"
-        },
-        {
-            id: 4,
-            name: "four"
-        },
-        {
-            id: 5,
-            name: "five"
-        }
-    ]
+            id: 1,
+            no: "3",
+            team_id: 1,
+            type: 3,
+            chapter: "测试习题",
+            text: "1+1=2?",
+            answer: 1,
+            choices: [
+                "2",
+                "3",
+                "4",
+                "5"
+            ]
+        }]
+    }
+}
+
+const readyStart = {
+    code: 200,
+    data: null
 }
 
 export default {
     fetchStart: () => {
         return startList
     },
+    updateStart: conf => {
+        console.log(conf)
+        startList.data.answer.splice(conf.body.index, 1, conf.body.answer)
+    }
 }

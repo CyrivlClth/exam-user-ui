@@ -10,7 +10,7 @@
           <v-card-title primary-title>
             <div>
               <div class="headline">Top western road trips</div>
-              <span class="grey--text">1,000 miles of wonder</span>
+              <span class="grey--text">{{question}}</span>
             </div>
           </v-card-title>
           <v-list-tile>
@@ -33,7 +33,7 @@
           <v-icon>history</v-icon>
         </v-btn>
 
-        <v-btn flat color="teal">
+        <v-btn flat color="teal" to="/start/2">
           <span>Favorites</span>
           <v-icon>favorite</v-icon>
         </v-btn>
@@ -49,6 +49,7 @@
 
 <script>
 import Grade from "@/components/Grade";
+import { UpdateStart } from "@/api/start";
 
 export default {
   name: "exam",
@@ -62,13 +63,40 @@ export default {
       video: false
     };
   },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.now = to.params.taskId - 1;
+    });
+  },
+  beforeRouteUpdate(to, from, next) {
+    UpdateStart({ index: this.now, answer: 2 })
+      .then(res => {
+        next();
+      })
+      .catch(() => {
+        console.log("error");
+        next(false);
+      });
+    // this.now = to.params.taskId - 1;
+    // next();
+  },
+  beforeRouteLeave(to, from, next) {
+    const answer = window.confirm(
+      "Do you really want to leave? you have unsaved changes!"
+    );
+    if (answer) {
+      next();
+    } else {
+      next(false);
+    }
+  },
   computed: {
     question() {
-      return this.list.questions[this.now];
+      return this.$store.getters.sheetData.questions[this.now];
     }
   },
   created() {
-    this.list = this.$store.getters.sheetData;
+    console.log(this.$store.getters.sheetData);
   },
   methods: {
     fetchData() {
